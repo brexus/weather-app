@@ -1,23 +1,125 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap');
 
 :root {
     --light: #e2e8f0;
     --dark: rgb(46, 46, 46);
+    --transparent-white: rgba(255, 255, 255, 0.5);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
-    color: black;
-    background-color: white;
+    color: rgb(255, 255, 255);
+    /* background-color: white; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
+}
+
+#content {
+    background-image: linear-gradient(to right top, #0091ff, #2691ff, #3792ff, #4492ff, #4f93ff, #429aff, #36a0ff, #2ca6ff, #00b2ff, #00beff, #00c9ff, #00d3ff);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================== */
+/* SEARCH CONTAINER */
+
+#search-container {
+    display: flex;
+    flex-direction: row;
+    border: 0;
+    border-radius: 20px;
+    background-color: #16508a;
+}
+
+#input-text-search {
+    color: white;
+    padding: 5px 15px;
+    border: 0;
+    /* border-bottom: 3px solid white;; */
+    font-size: 1.3rem;
+    /* font-weight: bold; */
+    background-color: transparent;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+}
+
+#input-search-btn {
+    width: 32px;
+    margin: 0 10px;
+    fill: white;
+    cursor: pointer;
+}
+
+#input-search-btn:hover {
+    transform: scale(1.08);
+    transition: 0.1s;
+}
+
+button {
+    border-radius: 10px;
+    border: 0;
+    padding: 4px 7px;
+    font-size: 1rem;
+}
+
+/* ============================================== */
+/* WEATHER CONTAINER */
+
+#weather-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#city-name-weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#city-country-title {
+    font-size: 2.5rem;
+}
+
+#date {
+    color: var(--transparent-white);
+    font-size: 1.5rem;
+}
+
+#weather-stats-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* TEMPERATURE C */
+#temp-C {
+    font-size: 4rem;
+}
+
+#feels-like-temp-C {
+    font-size: 1.3rem;
+    color: var(--transparent-white);
+}
+
+#img-background {
+    width: min(900px, 100%);
 }
