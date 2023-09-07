@@ -1,4 +1,4 @@
-import { getData, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime } from "./Weather";
+import { getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime, getConditionIcon } from "./Weather";
 
 const inputTextSearch = document.getElementById("input-text-search");
 const inputSearchBtn = document.getElementById("input-search-btn");
@@ -6,17 +6,16 @@ const searchContainer = document.getElementById("search-container");
 
 const searchBtnListener = () => {
     inputSearchBtn.addEventListener("click", () => {
-        const inputContent = inputSearchBtn.value;
+        const inputContent = inputTextSearch.value;
     
         if(inputContent !== "") {
-            getData(inputContent);
+            renderWeather(inputContent);
         }
     });
 
 };
 
 const searchFocusListener = () => {
-    
     inputTextSearch.addEventListener("focus", () => {
         searchContainer.classList.remove("no-outline");
         searchContainer.classList.add("white-outline");
@@ -44,7 +43,7 @@ const renderLocalTime = async (cityJson) => {
 const renderTempC = async (cityJson) => {
     const cityTempCValue = await getTempC(cityJson);
     const tempCDOM = document.getElementById("temp-C");
-    tempCDOM.innerText = `${cityTempCValue}°C`;
+    tempCDOM.innerHTML = `${cityTempCValue}°C`;
 };
 
 const renderFeelsLikeTempC = async (cityJson) => {
@@ -71,6 +70,12 @@ const renderPrecip = async (cityJson) => {
     precipDOM.innerText = `${cityPrecipMmValue} mm`;
 };
 
+const renderConditionIcon = async (cityJson) => {
+    const iconUrl = await getConditionIcon(cityJson);
+    const conditionIconDOM = document.getElementById("condition-icon");
+    conditionIconDOM.src = iconUrl;
+};
+
 const renderWeather = async (cityName) => {
     const cityJson = await getCityJson(cityName);
     renderCityCountryName(cityJson);
@@ -80,6 +85,7 @@ const renderWeather = async (cityName) => {
     renderWind(cityJson);
     renderPressure(cityJson);
     renderPrecip(cityJson);
+    renderConditionIcon(cityJson);
 };
 
 export { searchBtnListener, searchFocusListener, renderWeather };
