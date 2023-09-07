@@ -1,4 +1,4 @@
-import { getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime, getConditionIcon } from "./Weather";
+import { getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV } from "./Weather";
 
 const inputTextSearch = document.getElementById("input-text-search");
 const inputSearchBtn = document.getElementById("input-search-btn");
@@ -28,52 +28,115 @@ const searchFocusListener = () => {
 };
 
 const renderCityCountryName = async (cityJson) => {
-    const cityNameValue = await getName(cityJson);
-    const cityCountryValue = await getCountry(cityJson);
-    const cityCountryTitleDOM = document.getElementById("city-country-title");
-    cityCountryTitleDOM.innerText = `${cityNameValue}, ${cityCountryValue}`;
+    try {
+        const cityNameValue = await getName(cityJson);
+        const cityCountryValue = await getCountry(cityJson);
+        const cityCountryTitleDOM = document.getElementById("city-country-title");
+        cityCountryTitleDOM.innerText = `${cityNameValue}, ${cityCountryValue}`;
+    } catch (error) {
+        
+    }
+
 };
 
 const renderLocalTime = async (cityJson) => {
-    const cityLocalTimeValue = await getLocalTime(cityJson);
-    const localTimeDOM = document.getElementById("localtime");
-    localTimeDOM.innerText = `${cityLocalTimeValue}`;
+    try {
+        const cityLocalTimeValue = await getLocalTime(cityJson);
+        const localTimeDOM = document.getElementById("localtime");
+        localTimeDOM.innerText = `${cityLocalTimeValue}`;
+    } catch (error) {
+        
+    }
 };
 
 const renderTempC = async (cityJson) => {
-    const cityTempCValue = await getTempC(cityJson);
-    const tempCDOM = document.getElementById("temp-C");
-    tempCDOM.innerHTML = `${cityTempCValue}°C`;
+    try {
+        const cityTempCValue = await getTempC(cityJson);
+        const tempCDOM = document.getElementById("temp-C");
+        tempCDOM.innerHTML = `${cityTempCValue}°C`;
+    } catch (error) {
+        
+    }
 };
 
 const renderFeelsLikeTempC = async (cityJson) => {
-    const cityFeelsLikeTempCValue = await getFeelsLikeTempC(cityJson);
-    const feelsLikeTempCDOM = document.getElementById("feels-like-temp-C");
-    feelsLikeTempCDOM.innerText = `Feels like ${cityFeelsLikeTempCValue}°C`;
+    try {
+        const cityFeelsLikeTempCValue = await getFeelsLikeTempC(cityJson);
+        const feelsLikeTempCDOM = document.getElementById("feels-like-temp-C");
+        feelsLikeTempCDOM.innerText = `Feels like ${cityFeelsLikeTempCValue}°C`;
+    } catch (error) {
+        
+    }
 };
 
 const renderWind = async (cityJson) => {
-    const cityWindKmhValue = await getWindKmh(cityJson);
-    const windDOM = document.getElementById("wind");
-    windDOM.innerText = `${cityWindKmhValue} km/h`;
+    try {
+        const cityWindKmhValue = await getWindKmh(cityJson);
+        const windDOM = document.getElementById("wind");
+        windDOM.innerText = `${cityWindKmhValue} km/h`;
+    } catch (error) {
+        
+    }
 };
 
 const renderPressure = async (cityJson) => {
-    const cityPressureMbValue = await getPressureMb(cityJson);
-    const pressureDOM = document.getElementById("pressure");
-    pressureDOM.innerText = `${cityPressureMbValue} mb`;
+    try {
+        const cityPressureMbValue = await getPressureMb(cityJson);
+        const pressureDOM = document.getElementById("pressure");
+        pressureDOM.innerText = `${cityPressureMbValue} mb`;
+    } catch (error) {
+        
+    }
 };
 
 const renderPrecip = async (cityJson) => {
-    const cityPrecipMmValue = await getPrecipMm(cityJson);
-    const precipDOM = document.getElementById("precip")
-    precipDOM.innerText = `${cityPrecipMmValue} mm`;
+    try {
+        const cityPrecipMmValue = await getPrecipMm(cityJson);
+        const precipDOM = document.getElementById("precip")
+        precipDOM.innerText = `${cityPrecipMmValue} mm`;
+    } catch (error) {
+        
+    }
 };
 
 const renderConditionIcon = async (cityJson) => {
-    const iconUrl = await getConditionIcon(cityJson);
-    const conditionIconDOM = document.getElementById("condition-icon");
-    conditionIconDOM.src = iconUrl;
+    try {
+        const iconUrl = await getConditionIcon(cityJson);
+        const conditionIconDOM = document.getElementById("condition-icon");
+        conditionIconDOM.src = iconUrl;
+    } catch (error) {
+        
+    }
+};
+
+const renderCloud = async (cityJson) => {
+    try {
+        const cityCloudValue = await getCloud(cityJson);
+        const cloudDOM = document.getElementById("cloud")
+        cloudDOM.innerText = `${cityCloudValue}%`;
+    } catch (error) {
+        
+    }
+};
+
+const renderHumidity = async (cityJson) => {
+    try {
+        const cityHumidityValue = await getHumidity(cityJson);
+        const humidityDOM = document.getElementById("humidity");
+        humidityDOM.innerText = `${cityHumidityValue}%`;
+    } catch (error) {
+        
+    }
+};
+
+const renderUV = async (cityJson) => {
+    try {
+        const cityUVValue = await getUV(cityJson);
+        const UVDOM = document.getElementById("uv");
+        UVDOM.innerText = `${cityUVValue}/11`;
+    } catch (error) {
+        
+    }
 };
 
 const renderWeather = async (cityName) => {
@@ -86,36 +149,9 @@ const renderWeather = async (cityName) => {
     renderPressure(cityJson);
     renderPrecip(cityJson);
     renderConditionIcon(cityJson);
+    renderCloud(cityJson);
+    renderHumidity(cityJson);
+    renderUV(cityJson);
 };
 
 export { searchBtnListener, searchFocusListener, renderWeather };
-
-
-// const renderWeather = async (cityName) => {
-//     const cityJson = await getCityJson(cityName);
-//     const cityNameValue = await getName(cityJson);
-//     const cityCountryValue = await getCountry(cityJson);
-//     const cityLocalTimeValue = await getLocalTime(cityJson);
-//     const cityTempCValue = await getTempC(cityJson);
-//     const cityFeelsLikeTempCValue = await getFeelsLikeTempC(cityJson);
-//     const cityWindKmhValue = await getWindKmh(cityJson);
-//     const cityPressureMbValue = await getPressureMb(cityJson);
-//     const cityPrecipMmValue = await getPrecipMm(cityJson);
-
-
-//     const cityCountryTitleDOM = document.getElementById("city-country-title");
-//     const localTimeDOM = document.getElementById("localtime");
-//     const tempCDOM = document.getElementById("temp-C");
-//     const feelsLikeTempCDOM = document.getElementById("feels-like-temp-C");
-//     const windDOM = document.getElementById("wind");
-//     const pressureDOM = document.getElementById("pressure");
-//     const precipDOM = document.getElementById("precip")
-
-//     cityCountryTitleDOM.innerText = `${cityNameValue}, ${cityCountryValue}`;
-//     localTimeDOM.innerText = `${cityLocalTimeValue}`;
-//     tempCDOM.innerText = `${cityTempCValue}°C`;
-//     feelsLikeTempCDOM.innerText = `Feels like ${cityFeelsLikeTempCValue}°C`;
-//     windDOM.innerText = `${cityWindKmhValue}`;
-//     pressureDOM.innerText = `${cityPressureMbValue}`;
-//     precipDOM.innerText = `${cityPrecipMmValue}`;
-// };
