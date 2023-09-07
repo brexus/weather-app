@@ -1,5 +1,5 @@
-import { getData } from "./Weather";
-import { searchBtnListener, searchFocusListener } from "./ui";
+import { searchBtnListener, searchFocusListener, renderWeather } from "./ui";
 
 searchBtnListener();
 searchFocusListener();
+renderWeather("Lublin");

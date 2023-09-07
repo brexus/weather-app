@@ -2,8 +2,25 @@
 async function getCityJson(cityName) {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=9d60d06a938a401181691445230908&q=${cityName}`, {mode: 'cors'});
     const data = await response.json();
-
     return data;
+};
+
+async function getName(cityJson) {
+    const data = await cityJson;
+    const name = await data.location.name;
+    return name;
+};
+
+async function getCountry(cityJson) {
+    const data = await cityJson;
+    const countryName = await data.location.country;
+    return countryName;
+};
+
+async function getLocalTime(cityJson) {
+    const data = await cityJson;
+    const localTime = await data.location.localtime;
+    return localTime;
 };
 
 async function getTempC(cityJson) {
@@ -36,6 +53,8 @@ async function getPrecipMm(cityJson) {
     return precipMm;
 };
 
+
+
 async function getData(cityName) {
     const cityJson = await getCityJson(cityName);
     const cityTempC = await getTempC(cityJson);
@@ -53,4 +72,4 @@ async function getData(cityName) {
 
 };
 
-export { getData };
+export { getData, getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime };
