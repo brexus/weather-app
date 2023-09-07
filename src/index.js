@@ -1,4 +1,5 @@
 import { getData } from "./Weather";
-import searchBtnListener from "./ui";
+import { searchBtnListener, searchFocusListener } from "./ui";
 
 searchBtnListener();
+searchFocusListener();
