@@ -43,6 +43,7 @@ body {
     flex-direction: row;
     border-radius: 20px;
     background-color: #16508a;
+    margin-bottom: 40px;
 }
 
 #input-text-search {
@@ -61,7 +62,7 @@ body {
 }
 
 .white-outline {
-    outline: 2px solid white;
+    outline: 3px solid white;
 }
 
 .no-outline {
@@ -102,6 +103,7 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 #city-country-title {
@@ -125,10 +127,22 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
+}
+
+#temp-icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 #temp-C {
     font-size: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 h2#feels-like-temp-C {
