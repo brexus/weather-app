@@ -120,15 +120,40 @@ button {
 }
 
 /* TEMPERATURE C */
+#temp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #temp-C {
     font-size: 4rem;
 }
 
-#feels-like-temp-C {
+h2#feels-like-temp-C {
     font-size: 1.3rem;
     color: var(--transparent-white);
 }
 
 #img-background {
     width: min(900px, 100%);
+}
+
+/* WEATHER DETAILS STATS */
+#weather-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    gap: 35px;
+}
+
+#weather-stats h1 {
+    font-size: 1.2rem;
+    color: var(--transparent-white);
+}
+
+#weather-stats h2 {
+    font-size: 2rem;
 }
