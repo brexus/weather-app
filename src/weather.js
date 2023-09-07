@@ -59,6 +59,24 @@ async function getConditionIcon(cityJson) {
     return iconUrl;
 };
 
+async function getCloud(cityJson) {
+    const data = await cityJson;
+    const cloud = await data.current.cloud;
+    return cloud;
+};
+
+async function getHumidity(cityJson) {
+    const data = await cityJson;
+    const humidity = await data.current.humidity;
+    return humidity;
+};
+
+async function getUV(cityJson) {
+    const data = await cityJson;
+    const uv = await data.current.uv;
+    return uv;
+};
+
 async function getData(cityName) {
     const cityJson = await getCityJson(cityName);
     const cityTempC = await getTempC(cityJson);
@@ -76,4 +94,4 @@ async function getData(cityName) {
 
 };
 
-export { getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon };
+export { getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV };
