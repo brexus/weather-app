@@ -53,7 +53,11 @@ async function getPrecipMm(cityJson) {
     return precipMm;
 };
 
-
+async function getConditionIcon(cityJson) {
+    const data = await cityJson;
+    const iconUrl = await data.current.condition.icon;
+    return iconUrl;
+};
 
 async function getData(cityName) {
     const cityJson = await getCityJson(cityName);
@@ -72,4 +76,4 @@ async function getData(cityName) {
 
 };
 
-export { getData, getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime };
+export { getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon };
