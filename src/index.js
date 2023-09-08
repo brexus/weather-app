@@ -1,5 +1,3 @@
-import { searchBtnListener, searchFocusListener, renderWeather } from "./ui";
+import firstLoad from "./ui";
 
-searchBtnListener();
-searchFocusListener();
-renderWeather("Lublin");
+firstLoad("Lublin");
