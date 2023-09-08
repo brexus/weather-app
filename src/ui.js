@@ -1,8 +1,10 @@
-import { getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV } from "./Weather";
+import { getTempF, getFeelsLikeTempF, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getName, getCountry, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV } from "./Weather";
 
 const inputTextSearch = document.getElementById("input-text-search");
 const inputSearchBtn = document.getElementById("input-search-btn");
 const searchContainer = document.getElementById("search-container");
+
+let temperature_mode = "C";
 
 const searchBtnListener = () => {
     inputSearchBtn.addEventListener("click", () => {
@@ -25,6 +27,32 @@ const searchFocusListener = () => {
         searchContainer.classList.remove("white-outline");
         searchContainer.classList.add("no-outline");
     });
+};
+
+const tempCButtonListener = () => {
+    const tempCBtn = document.getElementById("temp-c-btn");
+
+    tempCBtn.addEventListener("click", turn_on_highlights_temp_C);
+};
+
+// podświetla przycisk zmiany na temperature Celsjusza
+const turn_on_highlights_temp_C = () => {
+    const tempCBtn = document.getElementById("temp-c-btn");
+    const tempFBtn = document.getElementById("temp-f-btn");
+
+    tempCBtn.classList.add("white-outline");
+    tempFBtn.classList.remove("white-outline");
+    
+
+};
+
+// podświetla przycisk zmiany na temperature Farenheita
+const turn_on_highlights_temp_F = () => {
+    const tempCBtn = document.getElementById("temp-c-btn");
+    const tempFBtn = document.getElementById("temp-f-btn");
+
+    tempFBtn.classList.add("white-outline");
+    tempCBtn.classList.remove("white-outline");
 };
 
 const renderCityCountryName = async (cityJson) => {
@@ -52,8 +80,18 @@ const renderLocalTime = async (cityJson) => {
 const renderTempC = async (cityJson) => {
     try {
         const cityTempCValue = await getTempC(cityJson);
-        const tempCDOM = document.getElementById("temp-C");
+        const tempCDOM = document.getElementById("temp");
         tempCDOM.innerHTML = `${cityTempCValue}°C`;
+    } catch (error) {
+        
+    }
+};
+
+const renderTempF = async (cityJson) => {
+    try {
+        const cityTempFValue = await getTempF(cityJson);
+        const tempFDOM = document.getElementById("temp");
+        tempFDOM.innerHTML = `${cityTempFValue}°F`;
     } catch (error) {
         
     }
@@ -62,8 +100,18 @@ const renderTempC = async (cityJson) => {
 const renderFeelsLikeTempC = async (cityJson) => {
     try {
         const cityFeelsLikeTempCValue = await getFeelsLikeTempC(cityJson);
-        const feelsLikeTempCDOM = document.getElementById("feels-like-temp-C");
+        const feelsLikeTempCDOM = document.getElementById("feels-like-temp");
         feelsLikeTempCDOM.innerText = `Feels like ${cityFeelsLikeTempCValue}°C`;
+    } catch (error) {
+        
+    }
+};
+
+const renderFeelsLikeTempF = async (cityJson) => {
+    try {
+        const cityFeelsLikeTempFValue = await getFeelsLikeTempF(cityJson);
+        const feelsLikeTempFDOM = document.getElementById("feels-like-temp");
+        feelsLikeTempFDOM.innerText = `Feels like ${cityFeelsLikeTempFValue}°C`;
     } catch (error) {
         
     }
@@ -156,10 +204,10 @@ const refreshStatsSceleton = () => {
         <div id="temp-container">
             <div id="temp-icon-container">
                 <img src="" alt="" id="condition-icon">
-                <h1 id="temp-C">-°C</h1>
+                <h1 id="temp">-°C</h1>
             </div>
 
-            <h2 id="feels-like-temp-C">Feels like - °C</h2>
+            <h2 id="feels-like-temp">Feels like - °C</h2>
         </div>
         
         <div id="weather-stats">
@@ -197,14 +245,12 @@ const refreshStatsSceleton = () => {
 }
 
 const renderWeather = async (cityName) => {
-    const cityJson = await getCityJson(cityName);
     refreshStatsSceleton();
+    const cityJson = await getCityJson(cityName);
 
-    if(cityJson !== null) {
+    if(!(cityJson instanceof Error)) {
         renderCityCountryName(cityJson);
         renderLocalTime(cityJson);
-        renderTempC(cityJson);
-        renderFeelsLikeTempC(cityJson);
         renderWind(cityJson);
         renderPressure(cityJson);
         renderPrecip(cityJson);
@@ -212,11 +258,52 @@ const renderWeather = async (cityName) => {
         renderCloud(cityJson);
         renderHumidity(cityJson);
         renderUV(cityJson);
+
+        if(temperature_mode === "C") {
+            renderTempC(cityJson);
+            renderFeelsLikeTempC(cityJson);
+        } else {
+            renderTempF(cityJson);
+            renderFeelsLikeTempF(cityJson);
+        }
+
     } else {
         removeStatsSceleton();
         document.querySelector("h3").innerText = "City not found!";
     }
 
+    
+
+    
+        // removeStatsSceleton();
+        // document.querySelector("h3").innerText = "City not found!";
+    
+
+
+    // if(cityJson !== null) {
+    //     renderCityCountryName(cityJson);
+    //     renderLocalTime(cityJson);
+    //     renderTempC(cityJson);
+    //     renderFeelsLikeTempC(cityJson);
+    //     renderWind(cityJson);
+    //     renderPressure(cityJson);
+    //     renderPrecip(cityJson);
+    //     renderConditionIcon(cityJson);
+    //     renderCloud(cityJson);
+    //     renderHumidity(cityJson);
+    //     renderUV(cityJson);
+    // } else {
+    //     removeStatsSceleton();
+    //     document.querySelector("h3").innerText = "City not found!";
+    // }
 };
 
-export { searchBtnListener, searchFocusListener, renderWeather };
+const firstLoad = (cityName) => {
+    searchBtnListener();
+    searchFocusListener();
+    tempCButtonListener();
+    renderWeather(cityName);
+};
+
+
+export default firstLoad ;
