@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;900;1000&display=swap');
 
 :root {
     --light: #e2e8f0;
     --dark: rgb(46, 46, 46);
     --transparent-white: rgba(255, 255, 255, 0.5);
+    --dark-blue: #16508a;
 }
 
 * {
@@ -33,7 +34,37 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 40px 0;
+    /* padding: 40px 0; */
+}
+
+
+/* ============================================== */
+/* SEARCH AND TEMPERATURE BUTTONS CONTAINER */
+#search-temp-buttons-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    margin: 30px 0;
+}
+
+#temp-c-f-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#temp-c-btn, #temp-f-btn {
+    background-color: var(--dark-blue);
+    color: white;
+    font-weight: 700;
+    padding: 10px 13px;
+    border-radius: 100%;
+}
+
+#temp-c-btn {
+
 }
 
 /* ============================================== */
@@ -43,9 +74,12 @@ body {
     display: flex;
     flex-direction: row;
     border-radius: 20px;
-    background-color: #16508a;
-    margin-bottom: 40px;
+    background-color: var(--dark-blue);
     width: min(400px, 100%);
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
 }
 
 #input-text-search {
@@ -88,6 +122,31 @@ button {
     padding: 4px 7px;
     font-size: 1rem;
 }
+
+/* ============================================== */
+/* HEADER CONTAINER*/
+#header-container {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding-left: 30px;
+    font-weight: 1000;
+    font-size: 1rem;
+}
+
+/* ============================================== */
+/* TEMP C F BUTTONS */
+#temp-c-f-container {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+
 
 /* ============================================== */
 /* WEATHER CONTAINER */
@@ -139,7 +198,7 @@ button {
     align-items: center;
 }
 
-#temp-C {
+#temp {
     font-size: 4rem;
     display: flex;
     flex-direction: row;
@@ -147,7 +206,7 @@ button {
     align-items: center;
 }
 
-h2#feels-like-temp-C {
+h2#feels-like-temp {
     font-size: 1.3rem;
     color: var(--transparent-white);
 }
