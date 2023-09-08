@@ -6,7 +6,7 @@ async function getCityJson(cityName) {
         const data = await response.json();
         return data;
     } catch (error) {
-        return null;
+        return error;
     }
 };
 
@@ -34,10 +34,22 @@ async function getTempC(cityJson) {
     return tempC;
 };
 
+async function getTempF(cityJson) {
+    const data = await cityJson;
+    const tempF = await data.current.temp_f;
+    return tempF;
+};
+
 async function getFeelsLikeTempC(cityJson) {
     const data = await cityJson;
     const feelsLikeTempC = await data.current.feelslike_c;
     return feelsLikeTempC;
+};
+
+async function getFeelsLikeTempF(cityJson) {
+    const data = await cityJson;
+    const feelsLikeTempF = await data.current.feelslike_f;
+    return feelsLikeTempF;
 };
 
 async function getWindKmh(cityJson) {
@@ -99,4 +111,4 @@ async function getData(cityName) {
 
 };
 
-export { getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV };
+export { getTempF, getFeelsLikeTempF, getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV };
