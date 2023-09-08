@@ -1,8 +1,13 @@
 
 async function getCityJson(cityName) {
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=9d60d06a938a401181691445230908&q=${cityName}`, {mode: 'cors'});
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=9d60d06a938a401181691445230908&q=${cityName}`, {mode: 'cors'});
+        if(!response.ok) throw new Error(`City ${cityName} not found`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return null;
+    }
 };
 
 async function getName(cityJson) {
