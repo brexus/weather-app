@@ -1,6 +1,5 @@
 import loadData from "./responses";
 import weatherController from "./weatherController";
-import { refreshStatsSceleton, removeStatsSceleton } from "./statsSceleton";
 
 // =============================================================================
 // LISTENERS
@@ -188,35 +187,25 @@ const renderLoadedData = () => {
 };
 
 
-// const renderWeather = async (cityName) => {
-//     refreshStatsSceleton();
-//     const cityJson = await getCityJson(cityName);
+// =============================================================================
+// NOT FOUND ERROR
+// =============================================================================
 
-//     if(!(cityJson instanceof Error)) {
-//         renderCityCountryName(cityJson);
-//         renderLocalTime(cityJson);
-//         renderWind(cityJson);
-//         renderPressure(cityJson);
-//         renderPrecip(cityJson);
-//         renderConditionIcon(cityJson);
-//         renderCloud(cityJson);
-//         renderHumidity(cityJson);
-//         renderUV(cityJson);
+const showCityNotFoundError = () => {
+    const weatherContainer = document.getElementById("weather-container");
+    weatherContainer.style.display = "none";
 
-//         if(weatherController.temperature_mode === "C") {
-//             renderTempC(cityJson);
-//             renderFeelsLikeTempC(cityJson);
-//         } else {
-//             renderTempF(cityJson);
-//             renderFeelsLikeTempF(cityJson);
-//         }
+    const city_not_found_error = document.getElementById("city-not-found-error");
+    city_not_found_error.style.display = "flex";
+};
 
-//     } else {
-//         removeStatsSceleton();
-//         document.querySelector("h3").innerText = "City not found!";
-//     }
-// };
+const hideCityNotFoundError = () => {
+    const weatherContainer = document.getElementById("weather-container");
+    weatherContainer.style.display = "flex";
 
+    const city_not_found_error = document.getElementById("city-not-found-error");
+    city_not_found_error.style.display = "none";
+}
 
 // =============================================================================
 // FIRST LOAD
@@ -237,5 +226,4 @@ const firstLoad = (cityName) => {
         });
 };
 
-
-export { firstLoad } ;
+export { firstLoad, showCityNotFoundError, hideCityNotFoundError };
