@@ -64,6 +64,7 @@ body {
     padding: 10px 13px;
     border-radius: 100%;
     margin: 0 5px;
+    cursor: pointer;
 }
 
 #temp-c-btn {
@@ -158,6 +159,18 @@ button {
     grid-row: 1 / 2;
     justify-self: center;
     align-self: center;
+}
+
+/* ============================================== */
+/* CITY NOT FOUND ERROR */
+#city-not-found-error {
+    font-size: 1.3rem;
+    font-weight: 700;
+    background-color: var(--dark-blue);
+    padding: 5px 15px;
+    border-radius: 30px;
+    margin-top: 20px;
+    display: none;
 }
 
 
