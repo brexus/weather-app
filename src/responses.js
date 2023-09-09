@@ -1,3 +1,4 @@
+import weatherController from "./weatherController";
 
 async function getCityJson(cityName) {
     try {
@@ -94,21 +95,28 @@ async function getUV(cityJson) {
     return uv;
 };
 
-async function getData(cityName) {
-    const cityJson = await getCityJson(cityName);
-    const cityTempC = await getTempC(cityJson);
-    const cityFeelsLikeTempC = await getFeelsLikeTempC(cityJson);
-    const cityWindKmh = await getWindKmh(cityJson);
-    const cityPressureMb = await getPressureMb(cityJson);
-    const cityPrecipMm = await getPrecipMm(cityJson);
+async function loadData(cityName) {
 
-    console.log(`Miasto: ${cityName}\n`);
-    console.log(`Temperatura: ${cityTempC} °C \n`);
-    console.log(`Temperatura odczuwalna: ${cityFeelsLikeTempC} °C \n`);
-    console.log(`Opady: ${cityPrecipMm} mm \n`);
-    console.log(`Wiatr: ${cityWindKmh} km/h`);
-    console.log(`Cisnienie: ${cityPressureMb} mb`);
+    weatherController.cityDataJSON = await getCityJson(cityName);
+    const cityDataJSON = weatherController.cityDataJSON;
 
+    weatherController.temp_c_value = await getTempC(cityDataJSON);
+    weatherController.feeling_temp_c_value = await getFeelsLikeTempC(cityDataJSON);
+
+    weatherController.temp_f_value = await getTempF(cityDataJSON);
+    weatherController.feeling_temp_f_value = await getFeelsLikeTempF(cityDataJSON);
+
+    weatherController.wind_value = await getWindKmh(cityDataJSON);
+    weatherController.pressure_value = await getPressureMb(cityDataJSON);
+    weatherController.precip_value = await getPrecipMm(cityDataJSON);
+    weatherController.cloud_value = await getCloud(cityDataJSON);
+    weatherController.humidity_value = await getHumidity(cityDataJSON);
+    weatherController.uv_index_value = await getUV(cityDataJSON);
+
+    weatherController.cityName = await getName(cityDataJSON);
+    weatherController.countryName = await getCountry(cityDataJSON);
+    weatherController.localTime = await getLocalTime(cityDataJSON);
+    weatherController.conditionIconURL = await getConditionIcon(cityDataJSON);
 };
 
-export { getTempF, getFeelsLikeTempF, getName, getCountry, getCityJson, getTempC, getFeelsLikeTempC, getWindKmh, getPressureMb, getPrecipMm, getLocalTime, getConditionIcon, getCloud, getHumidity, getUV };
+export default loadData;

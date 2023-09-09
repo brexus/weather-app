@@ -1,3 +1,3 @@
-import firstLoad from "./ui";
+import { firstLoad } from "./ui";
 
 firstLoad("Lublin");
