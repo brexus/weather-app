@@ -63,6 +63,7 @@ body {
     font-weight: 700;
     padding: 10px 13px;
     border-radius: 100%;
+    margin: 0 5px;
 }
 
 #temp-c-btn {
@@ -262,6 +263,7 @@ h2#feels-like-temp {
     #header-container {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
+        padding: 0;
     }
 
     #search-container {
@@ -272,6 +274,10 @@ h2#feels-like-temp {
     #temp-c-f-container {
         grid-column: 1 / 2;
         grid-row: 3 / 4;
+    }
+
+    #temp-c-btn, #temp-f-btn {
+        margin-top: 10px;
     }
 }
 
