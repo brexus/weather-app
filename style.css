@@ -6,6 +6,8 @@
     --dark: rgb(46, 46, 46);
     --transparent-white: rgba(255, 255, 255, 0.5);
     --dark-blue: #16508a;
+    --background-gradient1: linear-gradient(to right top, #0091ff, #2691ff, #3792ff, #4492ff, #4f93ff, #429aff, #36a0ff, #2ca6ff, #00b2ff, #00beff, #00c9ff, #00d3ff);;
+    --background-gradient2: linear-gradient(to right top, #18297e, #004e9e, #0071b6, #0093c6, #00b4d1, #00bed7, #00c9dc, #01d3e1, #00cae7, #00c0ec, #00b5ee, #0eaaee);;
 }
 
 * {
@@ -27,7 +29,7 @@ body {
 }
 
 #content {
-    background-image: linear-gradient(to right top, #0091ff, #2691ff, #3792ff, #4492ff, #4f93ff, #429aff, #36a0ff, #2ca6ff, #00b2ff, #00beff, #00c9ff, #00d3ff);
+    background-image: var(--background-gradient2);
     width: 100%;
     height: 100vh;
     display: flex;
@@ -43,7 +45,7 @@ body {
 #search-temp-buttons-container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr max-content 1fr;
     grid-template-rows: 1fr;
     margin: 30px 0;
 }
@@ -105,10 +107,18 @@ body {
 }
 
 #input-search-btn {
-    width: 32px;
     margin: 0 10px;
-    fill: white;
+    background-color: transparent;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-search-btn > svg {
+    fill: white;
+    width: 32px;
 }
 
 #input-search-btn:hover {
@@ -130,12 +140,14 @@ button {
     grid-row: 1 / 2;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding-left: 30px;
     font-weight: 1000;
     font-size: 1rem;
+    text-wrap: nowrap;
+    
 }
 
 /* ============================================== */
@@ -239,6 +251,28 @@ h2#feels-like-temp {
     font-weight: bold;
     padding: 10px;
     color: rgb(255, 255, 255);
+}
+
+@media only screen and (max-width: 900px) {
+    #search-temp-buttons-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    #header-container {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+
+    #search-container {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    #temp-c-f-container {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+    }
 }
 
 @media only screen and (max-width: 490px) { 
