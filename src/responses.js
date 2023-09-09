@@ -1,14 +1,12 @@
 import weatherController from "./weatherController";
+import { showCityNotFoundError, hideCityNotFoundError } from "./ui";
 
 async function getCityJson(cityName) {
-    try {
-        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=9d60d06a938a401181691445230908&q=${cityName}`, {mode: 'cors'});
-        if(!response.ok) throw new Error(`City ${cityName} not found`);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        return error;
-    }
+    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=9d60d06a938a401181691445230908&q=${cityName}`, {mode: 'cors'});
+    // if(!response.ok) throw new Error(`City ${cityName} not found`);
+    const data = await response.json();
+    return data;
+
 };
 
 async function getName(cityJson) {
@@ -97,26 +95,34 @@ async function getUV(cityJson) {
 
 async function loadData(cityName) {
 
-    weatherController.cityDataJSON = await getCityJson(cityName);
-    const cityDataJSON = weatherController.cityDataJSON;
+    try {
+        weatherController.cityDataJSON = await getCityJson(cityName);
+        const cityDataJSON = weatherController.cityDataJSON;
+    
+        weatherController.temp_c_value = await getTempC(cityDataJSON);
+        weatherController.feeling_temp_c_value = await getFeelsLikeTempC(cityDataJSON);
+    
+        weatherController.temp_f_value = await getTempF(cityDataJSON);
+        weatherController.feeling_temp_f_value = await getFeelsLikeTempF(cityDataJSON);
+    
+        weatherController.wind_value = await getWindKmh(cityDataJSON);
+        weatherController.pressure_value = await getPressureMb(cityDataJSON);
+        weatherController.precip_value = await getPrecipMm(cityDataJSON);
+        weatherController.cloud_value = await getCloud(cityDataJSON);
+        weatherController.humidity_value = await getHumidity(cityDataJSON);
+        weatherController.uv_index_value = await getUV(cityDataJSON);
+    
+        weatherController.cityName = await getName(cityDataJSON);
+        weatherController.countryName = await getCountry(cityDataJSON);
+        weatherController.localTime = await getLocalTime(cityDataJSON);
+        weatherController.conditionIconURL = await getConditionIcon(cityDataJSON);
 
-    weatherController.temp_c_value = await getTempC(cityDataJSON);
-    weatherController.feeling_temp_c_value = await getFeelsLikeTempC(cityDataJSON);
+        hideCityNotFoundError();
+    } catch (error) {
+        console.log("ERROR");
+        showCityNotFoundError();
+    }
 
-    weatherController.temp_f_value = await getTempF(cityDataJSON);
-    weatherController.feeling_temp_f_value = await getFeelsLikeTempF(cityDataJSON);
-
-    weatherController.wind_value = await getWindKmh(cityDataJSON);
-    weatherController.pressure_value = await getPressureMb(cityDataJSON);
-    weatherController.precip_value = await getPrecipMm(cityDataJSON);
-    weatherController.cloud_value = await getCloud(cityDataJSON);
-    weatherController.humidity_value = await getHumidity(cityDataJSON);
-    weatherController.uv_index_value = await getUV(cityDataJSON);
-
-    weatherController.cityName = await getName(cityDataJSON);
-    weatherController.countryName = await getCountry(cityDataJSON);
-    weatherController.localTime = await getLocalTime(cityDataJSON);
-    weatherController.conditionIconURL = await getConditionIcon(cityDataJSON);
 };
 
 export default loadData;
