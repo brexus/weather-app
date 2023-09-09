@@ -119,10 +119,8 @@ async function loadData(cityName) {
 
         hideCityNotFoundError();
     } catch (error) {
-        console.log("ERROR");
         showCityNotFoundError();
     }
-
 };
 
 export default loadData;
