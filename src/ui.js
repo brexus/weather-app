@@ -17,6 +17,11 @@ const searchBtnListener = () => {
             .then(() => {
                 const temperature_mode = weatherController.temperature_mode;
                 renderLoadedData();
+                const tempCBtn = document.getElementById("temp-c-btn");
+                const tempFBtn = document.getElementById("temp-f-btn");
+            
+                tempCBtn.classList.add("white-outline");
+                tempFBtn.classList.remove("white-outline");
             });
         }
     });
