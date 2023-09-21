@@ -23,7 +23,7 @@ In order to setup and work on this project on your own, you will need to:
 `git clone git@github.com:brexus/weather-app.git`
 
 2. Change directory
-`cd cv-generator`
+`cd weather-app`
 
 3. Install the required dependencies:
 `npm install`
