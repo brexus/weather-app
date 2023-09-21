@@ -6,8 +6,9 @@
     --dark: rgb(46, 46, 46);
     --transparent-white: rgba(255, 255, 255, 0.5);
     --dark-blue: #16508a;
-    --background-gradient1: linear-gradient(to right top, #0091ff, #2691ff, #3792ff, #4492ff, #4f93ff, #429aff, #36a0ff, #2ca6ff, #00b2ff, #00beff, #00c9ff, #00d3ff);;
-    --background-gradient2: linear-gradient(to right top, #18297e, #004e9e, #0071b6, #0093c6, #00b4d1, #00bed7, #00c9dc, #01d3e1, #00cae7, #00c0ec, #00b5ee, #0eaaee);;
+    --background-gradient1: linear-gradient(to right top, #0091ff, #2691ff, #3792ff, #4492ff, #4f93ff, #429aff, #36a0ff, #2ca6ff, #00b2ff, #00beff, #00c9ff, #00d3ff);
+    --background-gradient2: linear-gradient(to right top, #3117e5, #003dec, #0054ef, #0067ef, #0078ec, #0085ed, #0092eb, #009de8, #00a9ea, #00b4ea, #00bee8, #05c8e5);
+    --background-gradient3: linear-gradient(to right top, #18297e, #004e9e, #0071b6, #0093c6, #00b4d1, #00bed7, #00c9dc, #01d3e1, #00cae7, #00c0ec, #00b5ee, #0eaaee);
 }
 
 * {
